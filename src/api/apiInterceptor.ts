@@ -1,9 +1,8 @@
 import axios from "axios";
 
-
 const baseUrl = axios.create({
-    baseURL: "http://localhost:4000/v1"
-})
+  baseURL: "http://localhost:4000/v1",
+});
 
 baseUrl.interceptors.request.use(
   (config) => {
@@ -19,5 +18,13 @@ baseUrl.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+baseUrl.interceptors.response.use((config) => {
+  // redirect to login page
+  if (config.status === 401) {
+    localStorage.removeItem("token");
+  }
+  return config;
+});
 
 export default baseUrl;

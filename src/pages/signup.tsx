@@ -3,11 +3,11 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import lodash from "lodash";
 import { Link, useNavigate } from "react-router-dom";
-import { signupApi } from "../api/auth";
+import { signupApi } from "../api/authApi";
 import { IFormData } from "../types/types";
 import { toast } from "react-toastify";
 
-export const SignupForm = () => {
+const SignUpPage = () => {
   const navigate = useNavigate();
 
   const submitHandler = async (data: IFormData) => {
@@ -55,7 +55,7 @@ export const SignupForm = () => {
   });
 
   return (
-    <div className="w-full h-screen flex">
+    <div className="w-full h-screen flex pt-10">
       <div className="w-screen h-screen bg-black"></div>
       <div className="w-screen h-screen bg-black">
         {/* Form */}
@@ -65,7 +65,7 @@ export const SignupForm = () => {
               <div className="flex justify-center gap-2">
                 <Typography
                   variant="h3"
-                  color="blue"
+                  color="black"
                   className="text-center "
                   placeholder={undefined}
                   onPointerEnterCapture={undefined}
@@ -147,11 +147,11 @@ export const SignupForm = () => {
                     </em>
                   </div>
 
-                  <div className="flex w-24 ml-44">
+                  <div className="flex w-24 ml-16">
                     <Button
                       type="submit"
                       className="mt-2"
-                      color="blue"
+                      color="black"
                       variant="gradient"
                       fullWidth
                       placeholder={undefined}
@@ -161,9 +161,10 @@ export const SignupForm = () => {
                       Submit
                     </Button>
                   </div>
+
                   <Typography
                     color="gray"
-                    className="mt-4 text-center font-normal lg:w-68"
+                    className="mt-4 text-center font-normal lg:w-68 text-sm"
                     placeholder={undefined}
                     onPointerEnterCapture={undefined}
                     onPointerLeaveCapture={undefined}
@@ -185,3 +186,5 @@ export const SignupForm = () => {
     </div>
   );
 };
+
+export default SignUpPage;

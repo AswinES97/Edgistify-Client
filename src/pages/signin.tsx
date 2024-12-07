@@ -3,9 +3,9 @@ import { useFormik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as yup from "yup";
-import { signinApi } from "../api/auth";
+import { signinApi } from "../api/authApi";
 
-export const SigninForm = () => {
+const SignInPage = () => {
   const navigate = useNavigate();
 
   const submitHandler = async (formData: any) => {
@@ -15,7 +15,7 @@ export const SigninForm = () => {
         toast.success(data.message);
 
         setTimeout(() => {
-            navigate("/")
+          navigate("/");
         }, 1000);
       })
       .catch((err) => {
@@ -45,7 +45,7 @@ export const SigninForm = () => {
   });
 
   return (
-    <div className="w-full h-screen flex">
+    <div className="w-full h-screen flex pt-10">
       <div className="w-screen h-screen bg-black"></div>
       <div className="w-screen h-screen bg-black">
         {/* Form */}
@@ -55,7 +55,7 @@ export const SigninForm = () => {
               <div className="flex justify-center gap-2">
                 <Typography
                   variant="h3"
-                  color="blue"
+                  color="black"
                   className="text-center "
                   placeholder={undefined}
                   onPointerEnterCapture={undefined}
@@ -105,11 +105,11 @@ export const SigninForm = () => {
                     </em>
                   </div>
 
-                  <div className="flex w-24 ml-44">
+                  <div className="flex w-24 ml-14">
                     <Button
                       type="submit"
                       className="mt-2"
-                      color="blue"
+                      color="black"
                       variant="gradient"
                       fullWidth
                       placeholder={undefined}
@@ -121,7 +121,7 @@ export const SigninForm = () => {
                   </div>
                   <Typography
                     color="gray"
-                    className="mt-4 text-center font-normal lg:w-68"
+                    className="mt-4 text-center font-normal lg:w-68 text-sm"
                     placeholder={undefined}
                     onPointerEnterCapture={undefined}
                     onPointerLeaveCapture={undefined}
@@ -143,3 +143,5 @@ export const SigninForm = () => {
     </div>
   );
 };
+
+export default SignInPage;
