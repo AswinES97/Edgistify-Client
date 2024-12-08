@@ -66,7 +66,7 @@ export const Pagination: React.FC<IPaginationProps> = ({
         onPointerEnterCapture={undefined}
         onPointerLeaveCapture={undefined}
       >
-        <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" /> Previous
+        <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" /> 
       </Button>
       <div className="flex items-center gap-2">{totalIcon}</div>
       <Button
@@ -78,7 +78,7 @@ export const Pagination: React.FC<IPaginationProps> = ({
         onPointerEnterCapture={undefined}
         onPointerLeaveCapture={undefined}
       >
-        Next
+      
         <ArrowRightIcon strokeWidth={2} className="h-4 w-4" />
       </Button>
     </div>
