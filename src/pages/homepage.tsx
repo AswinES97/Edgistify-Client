@@ -28,7 +28,9 @@ const HomePage = () => {
   return (
     <div>
       {products.length === 0 ? (
-        <div className="flex flex-wrap gap-5">{loading}</div>
+        <div className="flex flex-wrap gap-5 w-auto justify-center pt-36">
+          {loading}
+        </div>
       ) : (
         <Fragment>
           <div className="flex flex-wrap gap-5 w-auto justify-center pt-36">

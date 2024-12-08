@@ -5,6 +5,7 @@ import { getToken } from "./components/auth";
 import { lazy } from "react";
 import HomePage from "./pages/homepage";
 import { toast } from "react-toastify";
+import NotFoundPage from "./pages/404";
 
 export const router = createBrowserRouter([
   {
@@ -47,5 +48,9 @@ export const router = createBrowserRouter([
         },
       },
     ],
+  },
+  {
+    path: "*",
+    Component: NotFoundPage,
   },
 ]);
