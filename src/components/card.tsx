@@ -110,12 +110,12 @@ export const CardComponent: React.FC<{ product: IProduct }> = ({ product }) => {
           Add to Cart
         </Button>
         <div className="w-28 ms-10">
-          <div className="relative w-full mt-2">
+          <div className="relative w-min-0 mt-2">
             <Input
               type="number"
               value={quantity}
               onChange={(e) => setQuantity(Number(e.target.value))}
-              className="min-w-0 !border-t-blue-gray-200 placeholder:text-blue-gray-300 placeholder:opacity-100  focus:!border-t-gray-900 appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              className="!border-t-blue-gray-200 placeholder:text-blue-gray-300 placeholder:opacity-100  focus:!border-t-gray-900 appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
               labelProps={{
                 className: "before:content-none after:content-none",
               }}
