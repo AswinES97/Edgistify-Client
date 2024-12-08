@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import { Footer } from "../components/footer";
 import { Navbar } from "../components/navbar";
 
-export const Wrapper = () => {
+const Wrapper = () => {
   return (
     <>
       <Navbar />
@@ -11,3 +11,5 @@ export const Wrapper = () => {
     </>
   );
 };
+
+export default Wrapper

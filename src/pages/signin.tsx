@@ -4,14 +4,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as yup from "yup";
 import { signinApi } from "../api/authApi";
+import { useAuth } from "../context/auth";
 
 const SignInPage = () => {
   const navigate = useNavigate();
+  const { setToken } = useAuth();
 
   const submitHandler = async (formData: any) => {
     await signinApi(formData)
       .then((data) => {
-        localStorage.setItem("token", data.token);
+        localStorage.setItem("token", data.toßken);
+        setToken(data.token)
         toast.success(data.message);
 
         setTimeout(() => {

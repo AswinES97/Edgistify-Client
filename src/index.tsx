@@ -6,7 +6,8 @@ import reportWebVitals from "./reportWebVitals";
 // @material-tailwind/react
 import { ThemeProvider } from "@material-tailwind/react";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
+import { AuthProvider } from "./context/auth";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -14,8 +15,10 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ThemeProvider>
-      <App />
-      <ToastContainer position="top-right" autoClose={1500}/>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+      <ToastContainer position="bottom-right" autoClose={1500} />
     </ThemeProvider>
   </React.StrictMode>
 );

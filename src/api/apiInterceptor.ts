@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios  from "axios";
 
 const baseUrl = axios.create({
   baseURL: "http://localhost:4000/v1",
@@ -9,7 +9,7 @@ baseUrl.interceptors.request.use(
     const token = localStorage.getItem("token");
 
     if (token) {
-      config.headers["Authorization"] = `Bearer ${token}`;
+      config.headers["authorization"] = `Bearer ${token}`;
     }
     return config;
   },
@@ -19,12 +19,5 @@ baseUrl.interceptors.request.use(
   }
 );
 
-baseUrl.interceptors.response.use((config) => {
-  // redirect to login page
-  if (config.status === 401) {
-    localStorage.removeItem("token");
-  }
-  return config;
-});
 
 export default baseUrl;
