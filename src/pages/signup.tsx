@@ -14,6 +14,7 @@ const SignUpPage = () => {
     await signupApi(data)
       .then((data) => {
         toast.success(data.message);
+        toast("Login to access full site")
         formik.resetForm();
 
         setTimeout(() => {

@@ -1,3 +1,4 @@
+// only for router
 export const getToken = () => {
   const token = localStorage.getItem("token");
   return !!token;

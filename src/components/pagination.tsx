@@ -1,21 +1,17 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
 import { Button, IconButton } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
+import { IPaginationProps } from "../types/types";
+import { useState } from "react";
 
-interface IPaginationProps {
-  totalNumber: number;
-  skipState: {
-    skip: number;
-    setSkip: Dispatch<SetStateAction<number>>;
-  };
-}
-
+// all Interface are in the types folder
+// parent component is triggered from here, using skipState
 export const Pagination: React.FC<IPaginationProps> = ({
   totalNumber,
   skipState,
 }) => {
   const [active, setActive] = useState<number>(1);
 
+  
   const getItemProps = (index: any) =>
     ({
       variant: active === index ? "filled" : "text",
@@ -27,23 +23,24 @@ export const Pagination: React.FC<IPaginationProps> = ({
       },
     } as any);
 
+
   const next = () => {
     if (active === totalNumber) return;
-
     setActive(active + 1);
 
     const nextSkip = skipState.skip + 9;
     skipState.setSkip(nextSkip);
   };
 
+
   const prev = () => {
     if (active === 1) return;
-
     setActive(active - 1);
 
     const prevSkip = skipState.skip - 9;
     skipState.setSkip(prevSkip);
   };
+
 
   let totalIcon: JSX.Element[] = [];
 
@@ -66,7 +63,7 @@ export const Pagination: React.FC<IPaginationProps> = ({
         onPointerEnterCapture={undefined}
         onPointerLeaveCapture={undefined}
       >
-        <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" /> 
+        <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" />
       </Button>
       <div className="flex items-center gap-2">{totalIcon}</div>
       <Button
@@ -78,7 +75,6 @@ export const Pagination: React.FC<IPaginationProps> = ({
         onPointerEnterCapture={undefined}
         onPointerLeaveCapture={undefined}
       >
-      
         <ArrowRightIcon strokeWidth={2} className="h-4 w-4" />
       </Button>
     </div>

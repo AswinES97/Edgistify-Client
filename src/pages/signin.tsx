@@ -23,6 +23,7 @@ const SignInPage = () => {
       })
       .catch((err) => {
         toast.error(err.response.data.error[0].message);
+        setToken(null);
       });
   };
 

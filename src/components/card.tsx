@@ -16,6 +16,8 @@ import { addToCart } from "../api/cartApi";
 import { currencyFormatter } from "../utils/currency-formatter";
 import { useState } from "react";
 
+// all Interface are in the types folder
+// useAuth is a custom hook with context of the token
 export const CardComponent: React.FC<{ product: IProduct }> = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
   const { token, setToken } = useAuth();
@@ -37,6 +39,8 @@ export const CardComponent: React.FC<{ product: IProduct }> = ({ product }) => {
             : toast.error(data.message);
         })
         .catch((err: any) => {
+          // my response error is in this path because i used a custom error handling
+          // package which i made for the express-validator
           toast.error(err.response?.data?.error[0]?.message);
           setToken(null);
 

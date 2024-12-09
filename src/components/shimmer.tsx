@@ -1,4 +1,4 @@
-export const LoadingSpinner = () => (
+export const Shimmer = () => (
   <section className="text-gray-700 body-font">
     <div className="p-20">
       <div className="h-full border-2 border-gray-200 rounded-lg overflow-hidden">

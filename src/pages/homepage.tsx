@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import loadProducts from "../api/productsApi";
-import { LoadingSpinner } from "../components/spinner";
+import { Shimmer } from "../components/shimmer";
 import { CardComponent } from "../components/card";
 import { IProduct } from "../types/types";
 import { Pagination } from "../components/pagination";
@@ -11,6 +11,7 @@ const HomePage = () => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
+    // loading initial 9 products and total productCount
     async function fetchData() {
       const data = await loadProducts(skip, count);
       setProducts(data.products);
@@ -19,10 +20,10 @@ const HomePage = () => {
     fetchData();
   }, [skip, count]);
 
+  // looping shimmer 
   const loading: JSX.Element[] = [];
-
   for (let i = 0; i < 9; i++) {
-    loading.push(<LoadingSpinner key={i} />);
+    loading.push(<Shimmer key={i} />);
   }
 
   return (

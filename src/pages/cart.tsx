@@ -5,10 +5,12 @@ import { currencyFormatter } from "../utils/currency-formatter";
 import { placeOrder } from "../api/orderApi";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/auth";
 
 const TABLE_HEAD = ["No.", "Name", "Quantity", "Price", "Total Price"];
 
 const CartPage = () => {
+  const { setToken } = useAuth();
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
 
@@ -59,7 +61,11 @@ const CartPage = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        setToken(null);
+
+        setTimeout(() => {
+          navigate("/signin");
+        }, 500);
       });
   };
 
