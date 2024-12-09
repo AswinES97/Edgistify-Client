@@ -14,7 +14,7 @@ const SignInPage = () => {
     await signinApi(formData)
       .then((data) => {
         localStorage.setItem("token", data.toßken);
-        setToken(data.token)
+        setToken(data.token);
         toast.success(data.message);
 
         setTimeout(() => {
@@ -49,7 +49,7 @@ const SignInPage = () => {
 
   return (
     <div className="w-full h-screen flex pt-10">
-      <div className="w-screen h-screen bg-black"></div>
+      <div className="hidden lg:block w-screen h-screen bg-black"></div>
       <div className="w-screen h-screen bg-black">
         {/* Form */}
         <div className="flex justify-center h-[45rem]">

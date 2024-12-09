@@ -33,7 +33,7 @@ const SignUpPage = () => {
       confirmPassword: "",
     },
     validationSchema: yup.object({
-      fullname: yup.string().trim().required("*Required"),
+      fullname: yup.string().trim().min(8).required("*Required"),
       email: yup.string().email("*Invalid email address").required("*Required"),
       password: yup
         .string()
@@ -56,7 +56,7 @@ const SignUpPage = () => {
 
   return (
     <div className="w-full h-screen flex pt-10">
-      <div className="w-screen h-screen bg-black"></div>
+      <div className="hidden lg:block w-screen h-screen bg-black"></div>
       <div className="w-screen h-screen bg-black">
         {/* Form */}
         <div className="flex justify-center h-[45rem]">
