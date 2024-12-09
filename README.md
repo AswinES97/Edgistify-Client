@@ -1,6 +1,6 @@
 # About the Project
 
-IMPOTANT :- when running in development server, the only thing to change is the baseURL, in "./src/api/apiInterceptor.ts". To host, it has been changed to an temporary subdomain. 
+## IMPORTANT :- when running in development server, the only thing to change is the baseURL, in "./src/api/apiInterceptor.ts". To host, it has been changed to an temporary subdomain. 
 
 ## Getting Started with Create React App
 
