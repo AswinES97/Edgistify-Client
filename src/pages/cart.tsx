@@ -67,12 +67,12 @@ const CartPage = () => {
     <div className="w-screen bg-white h-screen mt-20 flex flex-col justify-center">
       <div className="w-full flex justify-center">
         <Card
-          className="h-full w-[60rem] overflow-scroll py-5"
+          className="h-full md:w-[60rem] py-5"
           placeholder={undefined}
           onPointerEnterCapture={undefined}
           onPointerLeaveCapture={undefined}
         >
-          <table className="w-full min-w-max table-auto text-left">
+          <table className="w-full md:min-w-max table-auto text-left">
             <thead>
               <tr>
                 {TABLE_HEAD.map((head) => (
@@ -177,10 +177,10 @@ const CartPage = () => {
           </table>
         </Card>
       </div>
-      <div className="w-full flex justify-end py-7">
+      <div className="w-full flex md:justify-end justify-center py-7">
         <button
           onClick={handlePlaceOrder}
-          className=" font-bold border-2 bg-black text-white rounded-lg p-3 me-80 hover:bg-white hover:text-black hover:border-black hover:border-2"
+          className="font-bold border-2 bg-black text-white rounded-lg p-3 md:me-80 hover:bg-white hover:text-black hover:border-black hover:border-2"
         >
           Place Order
         </button>
