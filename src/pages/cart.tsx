@@ -2,15 +2,22 @@ import { Card, Typography } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { cartData } from "../api/cartApi";
 import { currencyFormatter } from "../utils/currency-formatter";
+import { placeOrder } from "../api/orderApi";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const TABLE_HEAD = ["No.", "Name", "Quantity", "Price", "Total Price"];
 
 const CartPage = () => {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
       const response = await cartData();
+      if (response.data.length === 0) {
+        toast(response.message);
+      }
       setProducts(response.data);
     }
     fetchData();
@@ -18,16 +25,46 @@ const CartPage = () => {
 
   let grandTotalValue = 0;
 
-  products.forEach((product: any) => {
-    const indianRs = currencyFormatter(product.price);
-    const currentProductTotal = indianRs * product.quantity;
-    grandTotalValue += currentProductTotal;
-  });
+  if (products.length > 0) {
+    products.forEach((product: any) => {
+      const indianRs = currencyFormatter(product.price);
+      const currentProductTotal = indianRs * product.quantity;
+      grandTotalValue += currentProductTotal;
+    });
+  }
 
-  const handlePlaceOrder = () => {};
+  const handlePlaceOrder = async () => {
+    await placeOrder()
+      .then((res) => {
+        if (res.status === "Error") {
+          toast.error(res.message);
+
+          let outOfStock = "";
+
+          res.data.forEach((product: any, index: any) => {
+            outOfStock += `${index + 1}. ${product.title} \n`;
+          });
+
+          setTimeout(() => {
+            toast.error(outOfStock);
+          }, 300);
+        }
+
+        if (res.status === "Success") {
+          toast.success(res.message);
+
+          setTimeout(() => {
+            navigate("/");
+          }, 1000);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
-    <div className="w-screen bg-white h-screen mt-24 flex flex-col justify-center">
+    <div className="w-screen bg-white h-screen mt-20 flex flex-col justify-center">
       <div className="w-full flex justify-center">
         <Card
           className="h-full w-[60rem] overflow-scroll py-5"
@@ -58,7 +95,7 @@ const CartPage = () => {
               </tr>
             </thead>
             <tbody>
-              {products.map(({ title, quantity, price }, index) => {
+              {products.map(({ title, quantity, price, stock }, index) => {
                 const isLast = index === products.length - 1;
                 const classes = isLast
                   ? "p-4"

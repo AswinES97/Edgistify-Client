@@ -1,7 +1,7 @@
 import axios  from "axios";
 
 const baseUrl = axios.create({
-  baseURL: "https://apiedge.aswines.online/v1",
+  baseURL: "http://localhost:4000/v1",
 });
 
 baseUrl.interceptors.request.use(

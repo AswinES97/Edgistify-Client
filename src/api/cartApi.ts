@@ -5,5 +5,6 @@ export const addToCart = async (productId: number, quantity: number) => {
 };
 
 export const cartData = async () => {
-  return await baseUrl.get("/cart");
+  const response = await baseUrl.get("/cart");
+  return response.data;
 };

@@ -86,13 +86,14 @@ export const CardComponent: React.FC<{ product: IProduct }> = ({ product }) => {
           {product.description}
         </Typography>
         <Typography
-          className="pt-5 font-bold"
+          className="pt-5 font-bold text-black"
           placeholder={undefined}
           onPointerEnterCapture={undefined}
           onPointerLeaveCapture={undefined}
         >
-          {`Rs. ${currencyFormatter(product.price)}`}
+          {`Rs. ${currencyFormatter(product.price)}`}{" "}
         </Typography>
+          <em className="text-sm"> (stock{" "}{ product.stock})</em>
       </CardBody>
       <CardFooter
         className="pt-0 flex gap-6"
@@ -101,7 +102,7 @@ export const CardComponent: React.FC<{ product: IProduct }> = ({ product }) => {
         onPointerLeaveCapture={undefined}
       >
         <Button
-          className="hover:bg-white hover:text-black hover:shadow-md hover:shadow-gray-600 h-14"
+          className="hover:bg-white hover:text-black hover:shadow-md hover:shadow-gray-600 hover:border-2 border-2 h-14"
           onClick={handleAddToCart}
           placeholder={undefined}
           onPointerEnterCapture={undefined}
