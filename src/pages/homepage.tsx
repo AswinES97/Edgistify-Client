@@ -20,7 +20,7 @@ const HomePage = () => {
     fetchData();
   }, [skip, count]);
 
-  // looping shimmer 
+  // looping shimmer
   const loading: JSX.Element[] = [];
   for (let i = 0; i < 9; i++) {
     loading.push(<Shimmer key={i} />);
@@ -35,8 +35,8 @@ const HomePage = () => {
       ) : (
         <Fragment>
           <div className="flex flex-wrap gap-5 w-auto justify-center pt-36">
-            {products.map((product: IProduct) => {
-              return <CardComponent key={product.id} product={product} />;
+            {products.map((product: IProduct, index: number) => {
+              return <CardComponent key={product.id} product={product} idx={index+1} />;
             })}
           </div>
           <div className="flex justify-center my-10">

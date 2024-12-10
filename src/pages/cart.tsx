@@ -40,6 +40,9 @@ const CartPage = () => {
       .then((res) => {
         if (res.status === "Error") {
           toast.error(res.message);
+        }
+        if (res.status === "Failed") {
+          toast.error(res.message);
 
           let outOfStock = "";
 
