@@ -1,4 +1,4 @@
-import { Typography, Input, Button } from "@material-tailwind/react";
+import { Typography, Input, Button, Spinner } from "@material-tailwind/react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import lodash from "lodash";
@@ -6,15 +6,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { signupApi } from "../api/authApi";
 import { IFormData } from "../types/types";
 import { toast } from "react-toastify";
+import { useState } from "react";
 
 const SignUpPage = () => {
+  const [disabled, setDisabled] = useState(false);
   const navigate = useNavigate();
 
   const submitHandler = async (data: IFormData) => {
+    setDisabled(true);
     await signupApi(data)
       .then((data) => {
         toast.success(data.message);
-        toast("Login to access full site")
+        toast("Login to access full site");
         formik.resetForm();
 
         setTimeout(() => {
@@ -22,6 +25,9 @@ const SignUpPage = () => {
         }, 1500);
       })
       .catch((err) => {
+        setTimeout(() => {
+          setDisabled(false);
+        }, 4000);
         toast.error(err.response.data.error[0].message);
       });
   };
@@ -149,18 +155,39 @@ const SignUpPage = () => {
                   </div>
 
                   <div className="flex w-24 ml-16">
-                    <Button
-                      type="submit"
-                      className="mt-2"
-                      color="black"
-                      variant="gradient"
-                      fullWidth
-                      placeholder={undefined}
-                      onPointerEnterCapture={undefined}
-                      onPointerLeaveCapture={undefined}
-                    >
-                      Submit
-                    </Button>
+                    {disabled ? (
+                      <Button
+                        disabled={disabled}
+                        type="submit"
+                        className="mt-2"
+                        color="black"
+                        variant="gradient"
+                        fullWidth
+                        placeholder={undefined}
+                        onPointerEnterCapture={undefined}
+                        onPointerLeaveCapture={undefined}
+                      >
+                        <Spinner 
+                          className="ms-2 h-4"
+                          onPointerEnterCapture={undefined}
+                          onPointerLeaveCapture={undefined}
+                        />
+                      </Button>
+                    ) : (
+                      <Button
+                        disabled={disabled}
+                        type="submit"
+                        className="mt-2"
+                        color="black"
+                        variant="gradient"
+                        fullWidth
+                        placeholder={undefined}
+                        onPointerEnterCapture={undefined}
+                        onPointerLeaveCapture={undefined}
+                      >
+                        Submit
+                      </Button>
+                    )}
                   </div>
 
                   <Typography

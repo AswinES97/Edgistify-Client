@@ -1,16 +1,19 @@
-import { Typography, Input, Button } from "@material-tailwind/react";
+import { Typography, Input, Button, Spinner } from "@material-tailwind/react";
 import { useFormik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as yup from "yup";
 import { signinApi } from "../api/authApi";
 import { useAuth } from "../context/auth";
+import { useState } from "react";
 
 const SignInPage = () => {
+  const [disabled, setDisabled] = useState(false);
   const navigate = useNavigate();
   const { setToken } = useAuth();
 
   const submitHandler = async (formData: any) => {
+    setDisabled(true);
     await signinApi(formData)
       .then((data) => {
         localStorage.setItem("token", data.toßken);
@@ -23,6 +26,7 @@ const SignInPage = () => {
       })
       .catch((err) => {
         toast.error(err.response.data.error[0].message);
+        setDisabled(false);
         setToken(null);
       });
   };
@@ -110,18 +114,39 @@ const SignInPage = () => {
                   </div>
 
                   <div className="flex w-24 ml-14">
-                    <Button
-                      type="submit"
-                      className="mt-2"
-                      color="black"
-                      variant="gradient"
-                      fullWidth
-                      placeholder={undefined}
-                      onPointerEnterCapture={undefined}
-                      onPointerLeaveCapture={undefined}
-                    >
-                      Submit
-                    </Button>
+                    {disabled ? (
+                      <Button
+                        disabled={disabled}
+                        type="submit"
+                        className="mt-2"
+                        color="black"
+                        variant="gradient"
+                        fullWidth
+                        placeholder={undefined}
+                        onPointerEnterCapture={undefined}
+                        onPointerLeaveCapture={undefined}
+                      >
+                        <Spinner
+                          className="ms-2 h-4"
+                          onPointerEnterCapture={undefined}
+                          onPointerLeaveCapture={undefined}
+                        />
+                      </Button>
+                    ) : (
+                      <Button
+                        disabled={disabled}
+                        type="submit"
+                        className="mt-2"
+                        color="black"
+                        variant="gradient"
+                        fullWidth
+                        placeholder={undefined}
+                        onPointerEnterCapture={undefined}
+                        onPointerLeaveCapture={undefined}
+                      >
+                        Submit
+                      </Button>
+                    )}
                   </div>
                   <Typography
                     color="gray"

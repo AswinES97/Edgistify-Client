@@ -7,6 +7,7 @@ import {
   Button,
   Input,
   IconButton,
+  Spinner,
 } from "@material-tailwind/react";
 import { IProduct } from "../types/types";
 import { toast } from "react-toastify";
@@ -23,11 +24,13 @@ export const CardComponent: React.FC<{ product: IProduct; idx: number }> = ({
   product,
   idx,
 }) => {
+  const [disabled, setDisabled] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const { token, setToken } = useAuth();
   const navigate = useNavigate();
 
   async function handleAddToCart() {
+    setDisabled(true);
     if (!token) {
       toast.error("Signin to add to cart");
 
@@ -41,6 +44,8 @@ export const CardComponent: React.FC<{ product: IProduct; idx: number }> = ({
           data.status === "Success"
             ? toast.success(data.message)
             : toast.error(data.message);
+
+          setDisabled(false);
         })
         .catch((err: any) => {
           // my response error is in this path because i used a custom error handling
@@ -115,15 +120,33 @@ export const CardComponent: React.FC<{ product: IProduct; idx: number }> = ({
           onPointerEnterCapture={undefined}
           onPointerLeaveCapture={undefined}
         >
-          <Button
-            className="hover:bg-white hover:text-black hover:shadow-md hover:shadow-gray-600 hover:border-2 border-2 h-14"
-            onClick={handleAddToCart}
-            placeholder={undefined}
-            onPointerEnterCapture={undefined}
-            onPointerLeaveCapture={undefined}
-          >
-            Add to Cart
-          </Button>
+          {disabled ? (
+            <Button
+              disabled={disabled}
+              className="hover:bg-white hover:text-black hover:shadow-md hover:shadow-gray-600 hover:border-2 border-2 h-14"
+              onClick={handleAddToCart}
+              placeholder={undefined}
+              onPointerEnterCapture={undefined}
+              onPointerLeaveCapture={undefined}
+            >
+              <Spinner
+                className="mx-7 h-4 "
+                onPointerEnterCapture={undefined}
+                onPointerLeaveCapture={undefined}
+              />
+            </Button>
+          ) : (
+            <Button
+              disabled={disabled}
+              className="hover:bg-white hover:text-black hover:shadow-md hover:shadow-gray-600 hover:border-2 border-2 h-14"
+              onClick={handleAddToCart}
+              placeholder={undefined}
+              onPointerEnterCapture={undefined}
+              onPointerLeaveCapture={undefined}
+            >
+              Add to Cart
+            </Button>
+          )}
           <div className="w-28 ms-10">
             <div className="relative w-min-0 mt-2">
               <Input
