@@ -90,6 +90,7 @@ const SignUpPage = () => {
                 <div className="px-16">
                   <div className="flex flex-col gap-1">
                     <Input
+                      autoFocus={true}
                       type="text"
                       id="fullname"
                       size="lg"
@@ -167,7 +168,7 @@ const SignUpPage = () => {
                         onPointerEnterCapture={undefined}
                         onPointerLeaveCapture={undefined}
                       >
-                        <Spinner 
+                        <Spinner
                           className="ms-2 h-4"
                           onPointerEnterCapture={undefined}
                           onPointerLeaveCapture={undefined}

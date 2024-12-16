@@ -81,6 +81,7 @@ const SignInPage = () => {
                 <div className="px-16">
                   <div className="flex flex-col gap-1">
                     <Input
+                      autoFocus={true}
                       type="text"
                       id="email"
                       size="lg"
