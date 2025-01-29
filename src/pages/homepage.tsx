@@ -11,7 +11,6 @@ const HomePage = () => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    // loading initial 9 products and total productCount
     async function fetchData() {
       const data = await loadProducts(skip, count);
       setProducts(data.products);
